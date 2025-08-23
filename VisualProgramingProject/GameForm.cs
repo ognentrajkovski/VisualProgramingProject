@@ -91,29 +91,33 @@ namespace VisualProgramingProject
 
         private Color NextColor()
         {
-            int h = rng.Next(0, 360);
-            float s = 0.55f + (float)rng.NextDouble() * 0.25f;
-            float v = 0.85f;
-            return FromHsv(h, s, v);
+            Color[] palette = new Color[]
+            {
+                Color.Crimson,
+                Color.OrangeRed,
+                Color.Gold,
+                Color.LimeGreen,
+                Color.DeepSkyBlue,
+                Color.MediumSlateBlue,
+                Color.Orchid,
+                Color.Coral,
+                Color.Chartreuse,
+                Color.Aqua,
+                Color.DodgerBlue,
+                Color.SlateBlue,
+                Color.HotPink,
+                Color.MediumVioletRed,
+                Color.Tomato,
+                Color.SpringGreen,
+                Color.Turquoise,
+                Color.CadetBlue,
+                Color.Plum
+            };
+
+            return palette[rng.Next(palette.Length)];
         }
 
-        private static Color FromHsv(double h, double s, double v)
-        {
-            double c = v * s;
-            double x = c * (1 - Math.Abs((h / 60.0) % 2 - 1));
-            double m = v - c;
-            (double r, double g, double b) = (0, 0, 0);
-            if (h < 60) (r, g, b) = (c, x, 0);
-            else if (h < 120) (r, g, b) = (x, c, 0);
-            else if (h < 180) (r, g, b) = (0, c, x);
-            else if (h < 240) (r, g, b) = (0, x, c);
-            else if (h < 300) (r, g, b) = (x, 0, c);
-            else (r, g, b) = (c, 0, x);
-            int R = (int)Math.Round((r + m) * 255);
-            int G = (int)Math.Round((g + m) * 255);
-            int B = (int)Math.Round((b + m) * 255);
-            return Color.FromArgb(R, G, B);
-        }
+
 
         private void TickGame()
         {
